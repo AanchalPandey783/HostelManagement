@@ -17,7 +17,8 @@ class MessMenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 12),
-      child: Container(
+      child:
+      Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: primary.shade100.withOpacity(0.2),
@@ -42,7 +43,16 @@ class MessMenuCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Breakfast: $breakfast',
+              'Breakfast:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                decoration: TextDecoration.none,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+            ),
+            Text(
+              '$breakfast',
               style: TextStyle(
                 fontSize: 16,
                 decoration: TextDecoration.none,
@@ -51,7 +61,16 @@ class MessMenuCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Lunch: $lunch',
+              'Lunch:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                decoration: TextDecoration.none,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+            ),
+            Text(
+              '$lunch',
               style: TextStyle(
                 fontSize: 16,
                 decoration: TextDecoration.none,
@@ -60,7 +79,16 @@ class MessMenuCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Dinner: $dinner',
+              'Dinner:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                decoration: TextDecoration.none,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+            ),
+            Text(
+              '$dinner',
               style: TextStyle(
                 fontSize: 16,
                 decoration: TextDecoration.none,

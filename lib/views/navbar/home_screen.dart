@@ -5,7 +5,10 @@ import 'package:minor_proj/user persona/end_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:minor_proj/util/utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
+import 'package:minor_proj/user persona/current_user.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeState extends State<HomeScreen> {
   final user = FirebaseAuth.instance.currentUser;
   final UserServices _userServices = UserServices();
+
   String? name = "";
 
   Future<String?> _fetchName() async {
@@ -42,6 +46,9 @@ class _HomeState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    userProvider.setUser();
+    final userType = userProvider.user?.userType ?? 'Unknown';
     double h = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Padding(
@@ -71,21 +78,27 @@ class _HomeState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (name != null)
-                              Text('Hi $name 👋',
+                              Text('Hi $name!',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color:Theme.of(context).colorScheme.tertiary,
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
                                       fontFamily: "Sen",
-                                      fontSize: 30,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.w500)),
                             const SizedBox(
                               height: 8,
                             ),
-                            const Text('Hostel Announcements',
-                                style: TextStyle(
-                                    color: Color.fromRGBO(139, 140, 142, 1),
-                                    fontFamily: "Sen",
-                                    fontSize: 25)),
+                            Row(
+                              children: [
+                                const Text('Hostel Announcements',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(139, 140, 142, 1),
+                                        fontFamily: "Sen",
+                                        fontSize: 25)),
+                                //DropdownButton(items: items, onChanged: onChanged)
+                              ],
+                            ),
                           ],
                         ),
                       ],
@@ -95,8 +108,13 @@ class _HomeState extends State<HomeScreen> {
                         IconButton(
                           icon: const Icon(Icons.add, size: 30),
                           onPressed: () {
-                            // Perform search operation
-                            Navigator.pushNamed(context, RoutesName.addAnnounce);
+                            if (userType == "admin") {
+                              Navigator.pushNamed(
+                                  context, RoutesName.addAnnounce);
+                            } else {
+                              Utils.toastMessage(
+                                  "You don't have access to add hostel annoucements");
+                            }
                           },
                         ),
                         const SizedBox(
@@ -126,12 +144,15 @@ class _HomeState extends State<HomeScreen> {
 
                                 if (!snapshot.hasData) {
                                   return Container(
-                                      color: Theme.of(context).colorScheme.secondary,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
                                       child: Center(
                                           child: SpinKitFadingCube(
                                               color: Theme.of(context)
                                                   .colorScheme
-                                                  .primary, size: 100.0)));
+                                                  .primary,
+                                              size: 100.0)));
                                 }
 
                                 // Data is available
@@ -145,7 +166,7 @@ class _HomeState extends State<HomeScreen> {
                                           height: 70,
                                         ),
                                         Image.asset(
-                                          'assets/images/aano.png',
+                                          'assets/images/announcement_girl.avif',
                                           width: 270,
                                           height: 370,
                                           fit: BoxFit.scaleDown,
@@ -159,15 +180,13 @@ class _HomeState extends State<HomeScreen> {
                                   itemCount: announcementDocs.length,
                                   reverse: false,
                                   itemBuilder: (context, index) {
-                                    final announcement =
-                                    announcementDocs[index].data()
-                                    as Map<String, dynamic>?;
+                                    final announcement = announcementDocs[index]
+                                        .data() as Map<String, dynamic>?;
                                     final title =
-                                        announcement?['title'] as String? ??
-                                            "";
+                                        announcement?['title'] as String? ?? "";
                                     final description =
                                         announcement?['description']
-                                        as String? ??
+                                                as String? ??
                                             "";
                                     final timestamp = announcement?['date'];
                                     final time = DateTime.parse(timestamp);

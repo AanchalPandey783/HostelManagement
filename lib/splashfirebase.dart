@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:minor_proj/util/routes/routes_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +7,10 @@ class SplashServices {
   void isLogin(BuildContext context) {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
-
+ 
     // Delayed navigation based on user authentication status
     void navigateAfterDelay(String routeName, {Object? arguments}) {
-      Timer(const Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 1), () {
         Navigator.pop(context);
         Navigator.pushNamed(context, routeName, arguments: arguments);
       });

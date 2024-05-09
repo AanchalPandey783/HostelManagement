@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:minor_proj/data/types/usersdata.dart';
 
 class UserServices {

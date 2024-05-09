@@ -28,7 +28,7 @@ class AnnouncementContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildTitleRow(),
-            const SizedBox(height: 8),
+             const SizedBox(height: 8),
             Text(
               description,
               style: const TextStyle(
@@ -56,11 +56,11 @@ class AnnouncementContainer extends StatelessWidget {
         ),
         const Icon(
           Icons.info_outline,
-          color: Colors.red,
+          color: Colors.green,
         ),
       ],
     );
-  }
+  } 
 
   Widget _buildTimestampText() {
     return Text(

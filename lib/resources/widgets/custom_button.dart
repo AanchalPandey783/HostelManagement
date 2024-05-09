@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minor_proj/resources/widgets/cutomtext.dart';
 
-
 class CustomButton extends StatelessWidget {
   final String msg;
   final VoidCallback onTap;
@@ -21,17 +20,17 @@ class CustomButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          // Decoration for the button
+         width: 300,
           decoration: BoxDecoration(
-boxShadow: [
+            boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: const Color.fromARGB(255, 130, 130, 130).withOpacity(0.5),
                 offset: const Offset(2, 2),
                 blurRadius: 4,
               ),
             ],
-            color: const Color(0xFF26282F),
-            borderRadius: BorderRadius.circular(20),
+            color: Color.fromRGBO(10, 79, 68, 1),
+            borderRadius: BorderRadius.circular(50),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -40,13 +39,13 @@ boxShadow: [
                 padding: const EdgeInsets.all(14),
                 child: loading
                     ? const CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: Colors.white,
-                )
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      )
                     : CustomText(
-text: msg,
-                  color: Colors.white,
-                ),
+                        text: msg,
+                        color: Colors.white,
+                      ),
               ),
             ],
           ),

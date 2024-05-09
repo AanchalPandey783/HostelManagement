@@ -24,13 +24,13 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
   }
 
   void _fetchRatings() async {
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-    print(formattedDate);
+    //DateTime now = DateTime.now();
+    //Timestamp formattedDate = Timestamp.fromDate(now);
+    //print(formattedDate);
     final snapshot = await FirebaseFirestore.instance
         .collection('ratings')
-        .orderBy('timestamp', descending: true)
-        .where('timestamp', isEqualTo: formattedDate)
+        //.where('timestamp', isGreaterThanOrEqualTo: formattedDate)
+        //.orderBy('timestamp', descending: true) // Maintain descending order
         .get();
 
     setState(() {
@@ -39,7 +39,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         return Rating(
           userId: data['userId'],
           rating: data['rating'].toDouble(),
-          timestamp: data['timestamp'],
+          timestamp: data['timestamp'].toTimestamp(),
         );
       }).toList();
       print(_ratings);
@@ -59,61 +59,73 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       } else {
         statistics[id] = rating.rating;
       }
+      }
+
+      return statistics.entries.map((entry) {
+        return _DataPoint(entry.key, entry.value);
+      }).toList();
     }
 
-    return statistics.entries.map((entry) {
-      return _DataPoint(entry.key, entry.value);
-    }).toList();
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        body: Center(
+          child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 15, 16, 18).withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: //_chartData.isNotEmpty?
+                  Container(
+                                height: 200,
+                                width: 300,
+                                child: Column(
+                  children: [
+                    const Text(
+                      "Today's Mess Rating",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.none,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Container(
+                      height: 150,
+                      width: 300,
+                      child: SfCartesianChart(
+                        primaryXAxis: CategoryAxis(),
+                        series: <ColumnSeries<_DataPoint, String>>[
+                          ColumnSeries<_DataPoint, String>(
+                            dataSource: _chartData,
+                            xValueMapper: (_DataPoint data, _) => data.date,
+                            yValueMapper: (_DataPoint data, _) => data.rating,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                                ),
+                              )
+              //:
+              //        const Center(
+              //           child: Text(
+              //             "No Ratings Till Now X_X",
+              //             style: TextStyle(
+              //               fontSize: 25,
+              //               fontWeight: FontWeight.bold,
+              //               decoration: TextDecoration.none,
+              //               color: Colors.black,
+              //             ),
+              //           ),
+              //         ),
+              ),
+        ),
+      );
+    }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: primary.shade100.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: _chartData.isNotEmpty
-            ? Column(
-                children: [
-                  const Text(
-                    "Today's Mess Rating",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.none,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SfCartesianChart(
-                    primaryXAxis: CategoryAxis(),
-                    series: <ColumnSeries<_DataPoint, String>>[
-                      ColumnSeries<_DataPoint, String>(
-                        dataSource: _chartData,
-                        xValueMapper: (_DataPoint data, _) => data.date,
-                        yValueMapper: (_DataPoint data, _) => data.rating,
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            : const Center(
-                child: Text(
-                  "No Ratings Till Now😴",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.none,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-      ),
-    );
-  }
-}
 
 class _DataPoint {
   final String date;

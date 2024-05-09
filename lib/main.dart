@@ -7,8 +7,6 @@ import 'package:provider/provider.dart';
 import 'util/routes/routes.dart';
 import 'util/routes/routes_names.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

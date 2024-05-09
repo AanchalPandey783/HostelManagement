@@ -5,7 +5,8 @@ import 'package:minor_proj/util/utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:minor_proj/user persona/current_user.dart';
 class AddComplain extends StatefulWidget {
   AddComplain({Key? key}) : super(key: key);
 
@@ -37,7 +38,7 @@ class _AddComplainState extends State<AddComplain> {
                   children: [
                     CustomTextField(
                         hintText: 'Name',
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.tertiary,
                         controller: nameController,
                         icon: Icons.person,
                         keyboardType: TextInputType.text,
@@ -53,7 +54,7 @@ class _AddComplainState extends State<AddComplain> {
                     ),
                     CustomTextField(
                         hintText: 'Title',
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.tertiary,
                         controller: titleController,
                         icon: Icons.title,
                         keyboardType: TextInputType.text,
@@ -69,7 +70,7 @@ class _AddComplainState extends State<AddComplain> {
                     ),
                     CustomTextField(
                         hintText: 'Description',
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.tertiary,
                         controller: desController,
                         icon: Icons.description,
                         keyboardType: TextInputType.text,
@@ -85,11 +86,11 @@ class _AddComplainState extends State<AddComplain> {
                     ),
                     CustomTextField(
                         hintText: 'Room Number',
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.tertiary,
                         controller: roomController,
                         icon: Icons.room,
                         obscureText: false,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return 'Enter room number';

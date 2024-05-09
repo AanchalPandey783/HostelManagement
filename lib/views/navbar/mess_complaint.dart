@@ -64,7 +64,7 @@ class _HomeState extends State<MComplainScreen> {
                               Text(
                                 'Your Complaints Status',
                                 style: TextStyle(
-                                  color: Color.fromRGBO(139, 140, 142, 1),
+                                  color:Color.fromRGBO(1, 78, 68, 255),
                                   fontFamily: "Sen",
                                   fontSize: 25,
                                 ),
@@ -82,7 +82,7 @@ class _HomeState extends State<MComplainScreen> {
                                   context, RoutesName.addComplain);
                             },
                           ),
-                          const SizedBox(
+                          const SizedBox( 
                             width: 20,
                           ),
                         ],
@@ -97,6 +97,7 @@ class _HomeState extends State<MComplainScreen> {
                       stream: FirebaseFirestore.instance
                           .collection('complaints')
                           .where('uid', isEqualTo: user!.uid.toString())
+                          .orderBy('timestamp', descending: true)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
@@ -125,9 +126,9 @@ class _HomeState extends State<MComplainScreen> {
                                   height: 70,
                                 ),
                                 Image.asset(
-                                  'assets/images/No Complain found3.png',
-                                  width: 270,
-                                  height: 370,
+                                  'assets/images/no_complaint.jpg',
+                                  width: 200,
+                                  height: 200,
                                   fit: BoxFit.scaleDown,
                                 ),
                               ],
@@ -141,17 +142,19 @@ class _HomeState extends State<MComplainScreen> {
                           itemBuilder: (context, index) {
                             final announcement = announcementDocs[index].data()
                                 as Map<String, dynamic>?;
+                                final user_announce = announcementDocs[index].data()
+                                as Map<String, dynamic>?;
                             final title =
                                 announcement?['title'] as String? ?? "";
-                            final name = announcement?['name'] as String? ?? "";
-                            final room = announcement?['room'] as String? ?? "";
+
                             final description =
                                 announcement?['description'] as String? ?? "";
                             final status =
                                 announcement?['status'] as String? ?? "";
                             final timestamp = announcement?['date'];
                             final time = DateTime.parse(timestamp);
-
+                            final name = announcement?['name'] as String? ?? "";
+                            final room = announcement?['room'] as String? ?? "";
                             return ComplainContainer(
                               title: title,
                               description: description,
@@ -170,7 +173,7 @@ class _HomeState extends State<MComplainScreen> {
                   ),
                 ],
               )
-            : (userType == "Admin")
+            : (userType == "admin")
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

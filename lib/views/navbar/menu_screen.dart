@@ -23,7 +23,7 @@ class _HomeState extends State<MenuScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     final userProvider = Provider.of<UserProvider>(context);
-    userProvider.setUser();
+    userProvider.setUser(); 
     final userType = userProvider.user?.userType ?? 'Unknown';
     if (kDebugMode) {
       print('usertype:$userType');
@@ -38,97 +38,94 @@ class _HomeState extends State<MenuScreen> {
 
     return Padding(
       padding: EdgeInsets.only(top: screenHeight / 50),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: screenHeight / 1.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Row(
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Mess Updates',
-                              style: TextStyle(
-                                color: Color.fromRGBO(139, 140, 142, 1),
-                                fontFamily: "Sen",
-                                fontSize: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.add,
-                            size: 30,
-                            color: Theme.of(context).colorScheme.tertiary,
-                          ),
-                          onPressed: () {
-                            if (userType == "Admin") {
-                              Navigator.pushNamed(context, RoutesName.mMenu);
-                            } else {
-                              Utils.toastMessage(
-                                  "You don't have access to add mess menu");
-                            }
-                          },
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                if (userType != "Admin")
-                  Center(
-                    child: Image.asset(
-                      'assets/images/aubfoof.gif',
-                      width: screenWidth * 0.75,
-                      height: screenHeight * 0.3,
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                MessMenuCard(
-                  lunch: lunch,
-                  breakfast: breakfast,
-                  dinner: dinner,
-                ),
-                if (userType == "Admin")
-                  SizedBox(
-                    height: screenHeight / 2.2,
-                    width: screenWidth,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: StatisticsScreen(),
-                    ),
-                  )
-                else if (userType == "Regular")
-                  const RatingScreen(),
-              ],
+      child: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Mess Updates',
+                            style: TextStyle(
+                              color: Color.fromRGBO(34, 31, 31, 0.886),
+                              fontFamily: "Sen",
+                              fontSize: 25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.add,
+                          size: 30,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        onPressed: () {
+                          if (userType == "admin") {
+                            Navigator.pushNamed(context, RoutesName.mMenu);
+                          } else {
+                            Utils.toastMessage(
+                                "You don't have access to add mess menu");
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              if (userType != "admin")
+                Center(
+                  child: Image.asset(
+                    'assets/images/mess_eating_girl.jpg',
+                    width: screenWidth * 0.75,
+                    height: screenHeight * 0.3,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              MessMenuCard(
+                lunch: lunch,
+                breakfast: breakfast,
+                dinner: dinner,
+              ),
+              if (userType == "admin")
+                SizedBox(
+                  height: screenHeight / 2.2,
+                  width: screenWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: StatisticsScreen(),
+                  ),
+                )
+              else if (userType == "Regular")
+                const RatingScreen(),
+            ],
           ),
         ),
       ),

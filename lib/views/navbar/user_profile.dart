@@ -16,7 +16,7 @@ class ProfileScreen extends StatefulWidget {
 class _HomeState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    var size=MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
     final userProvider = Provider.of<UserProvider>(context);
     userProvider.setUser();
     final userType = userProvider.user?.userType ?? 'Unknown';
@@ -31,113 +31,118 @@ class _HomeState extends State<ProfileScreen> {
     final themeChange = Provider.of<UserProvider>(context);
 
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0,),
+      padding: const EdgeInsets.only(
+        top: 20.0,
+      ),
       child: Container(
         decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
             image: DecorationImage(
-              image: AssetImage('assets/images/zyro-image (2).png',),
-              fit: BoxFit.fill,
+              image: AssetImage(
+                'assets/images/user_girl.jpg',
+              ),
+              fit: BoxFit.contain,
+              opacity: 0.3,
             ),
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.only(bottom: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 5.0),
-                Text(
-                  name,
-                  style: const TextStyle(
-                      fontSize: 34.0,
-                      fontFamily: "Sen",
-                      fontWeight: FontWeight.bold,
-                      height: 1,
-                      color: Colors.black),
-                ),
-                Text(
-                  "Room No. $room",
-                  style: const TextStyle(
-                    fontSize: 25.0,
-                    fontFamily: "Sen",
-                    color: Color.fromARGB(255, 78, 77, 77),
-                  ),
-                ),
-                const Divider(),
-                ListTile(
-                  leading: const Icon(
-                    Icons.email,
-                    color: Color.fromARGB(255, 106, 131, 76),
-                  ),
-                  title: Text(email,
-                      style: const TextStyle(
-                          fontFamily: "Sen",
-                          fontSize: 18,
-                          color: Colors.black)),
-                ),
-                const Divider(),
-                ListTile(
-                  leading: const Icon(
-                    Icons.phone,
-                    color: Color.fromARGB(255, 106, 131, 76),
-                  ),
-                  title: Text(phone,
-                      style: const TextStyle(
-                          fontFamily: "Sen",
-                          fontSize: 18,
-                          color: Colors.black)),
-                ),
-                const Divider(),
-                ListTile(
-                  leading: const Icon(
-                    Icons.edit,
-                    color: Color.fromARGB(255, 106, 131, 76),
-                  ),
-                  title: const Text("Edit details",
-                      style: TextStyle(
-                          fontFamily: "Sen",
-                          fontSize: 18,
-                          color: Colors.black)),
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.editScreen);
-                  },
-                ),
-                const Divider(),
-                SwitchListTile.adaptive(
-                    title: const Text("Dark Mode", style: TextStyle(color: Colors.black),),
-                    value: themeChange.darkTheme,
-                    onChanged: (bool? value) {
-                      themeChange.darkTheme = value!;
-                      Fluttertoast.showToast(msg: 'Theme changed to ${value ? 'Dark mode' : 'Light mode'}', toastLength: Toast.LENGTH_SHORT);
-                    }),
-               // const SizedBox(height: 135.0),
-                SizedBox(height: size.height*0.179,),
-                const Text("Made for IETians with ❤️",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Sen",
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold)),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                  child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 5.0),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15.0, 2.0, 0, 0),
                     child: Text(
-                        "To provide feedback or to suggest new features, please email at aubergefeedback@gmail.com",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Sen",
-                            fontSize: 14.3)),
+                      name,
+                      style: const TextStyle(
+                          fontSize: 28.0,
+                          fontFamily: "Sen",
+                          fontWeight: FontWeight.w500,
+                          height: 1,
+                          color: Color.fromRGBO(1, 78, 68, 1)),
+                    ),
                   ),
-                ),
-             const SizedBox(height: 20),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15.0, 2.0, 0, 0),
+                    child: Text(
+                      "$room",
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontFamily: "Sen",
+                        color: Color.fromARGB(255, 78, 77, 77),
+                      ),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.email,
+                      color: Color.fromARGB(255, 106, 131, 76),
+                    ),
+                    title: Text(email,
+                        style: const TextStyle(
+                            fontFamily: "Sen",
+                            fontSize: 18,
+                            color: Colors.black)),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.phone,
+                      color: Color.fromARGB(255, 106, 131, 76),
+                    ),
+                    title: Text(phone,
+                        style: const TextStyle(
+                            fontFamily: "Sen",
+                            fontSize: 18,
+                            color: Colors.black)),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.edit,
+                      color: Color.fromARGB(255, 106, 131, 76),
+                    ),
+                    title: const Text("Edit details",
+                        style: TextStyle(
+                            fontFamily: "Sen",
+                            fontSize: 18,
+                            color: Colors.black)),
+                    onTap: () {
+                      Navigator.pushNamed(context, RoutesName.editScreen);
+                    },
+                  ),
+                  const Divider(),
+                  SwitchListTile.adaptive(
+                      title: const Text(
+                        "Dark Mode",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      value: themeChange.darkTheme,
+                      onChanged: (bool? value) {
+                        themeChange.darkTheme = value!;
+                        Fluttertoast.showToast(
+                            msg:
+                                'Theme changed to ${value ? 'Dark mode' : 'Light mode'}',
+                            toastLength: Toast.LENGTH_SHORT);
+                      }),
+                  // const SizedBox(height: 135.0),
+                  SizedBox(
+                    height: size.height * 0.179,
+                  ),
+
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ),
       ),
-
     );
   }
 }

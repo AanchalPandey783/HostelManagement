@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "889429194995",
-    "project_id": "hostel-minor-project",
-    "storage_bucket": "hostel-minor-project.appspot.com"
+    "project_number": "1087919623001",
+    "project_id": "minor-proj-ddf08",
+    "storage_bucket": "minor-proj-ddf08.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:889429194995:android:d70c13218a6477f0de9f86",
+        "mobilesdk_app_id": "1:1087919623001:android:20491e3f297af5c5b79a48",
         "android_client_info": {
           "package_name": "com.example.minor_proj"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAmU3xsgygaeKldLf93G61fe5r5i8BQT5Q"
+          "current_key": "AIzaSyBrLJPeZNRv7NnQZgkbqjDNGTQJOKU1CtM"
         }
       ],
       "services": {

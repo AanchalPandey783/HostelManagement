@@ -24,12 +24,10 @@ class _SplashState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Image.asset(
-          'assets/images/kiit_nobg_jpeg.jpg',
-          width: w/2,
-          height: h/3,
-          fit: BoxFit.cover,
-        ),
+        child: Image.asset('assets/images/kiit_logo.png',
+                height: h * 0.2,  
+                width: w* 0.7,
+                )
       ),
     );
   }

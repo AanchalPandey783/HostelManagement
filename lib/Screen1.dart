@@ -25,14 +25,26 @@ class _FirstScreenState extends State<FirstScreen> {
               minHeight: viewportConstraints.maxHeight,
             ),
             child: Column(
-              children: [
+                 children: [
+                  const SizedBox(
+                  height: 5,
+                ),
+                Image.asset('assets/images/kiit_logo.png',
+                height: h * 0.2,  
+                width: w* 0.7,
+                ),
+                  
+                Image.asset('assets/images/homle_light_bg.png',
+                // height: h * 0.5,
+                // width: w* 0.2,
+                ), 
                 const SizedBox(
-                  height: 10,
+                  height: 2,
                 ),
                 Image.asset(
-                  'assets/images/hostel_life_onboarding_splash.png',
+                  'assets/images/phone_girl.jpg',
                   width: w,
-                  height: h / 1.5,
+                  height: h * 0.34,
                   fit: BoxFit.scaleDown,
                 ),
                 const SizedBox(
@@ -40,24 +52,19 @@ class _FirstScreenState extends State<FirstScreen> {
                 ),
                 Column(
                   children: [
-                    const Text("Choose your preference",
-                        style: TextStyle(color: Colors.grey, fontSize: 18)),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    //mention hostel
-                    const Text("What's your",
+                    const Text("Hostel Management",
                         style: TextStyle(
+                          fontFamily: 'Inter',
                             color: primary,
-                            fontSize: 38,
-                            fontWeight: FontWeight.bold)),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700)),
                     const SizedBox(
                       height: 2,
                     ),
-                    const Text("Hostel",
+                    const Text("made easy",
                         style: TextStyle(
                             color: Colors.grey,
-                            fontSize: 38,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold)),
                     const SizedBox(
                       height: 30,
@@ -71,7 +78,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       height: 30,
                     ),
                   ],
-                )
+                ) 
               ],
             ),
           ),

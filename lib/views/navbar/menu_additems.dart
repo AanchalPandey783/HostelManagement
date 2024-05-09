@@ -28,7 +28,7 @@ class _AddMessMenu extends State<AddMessMenu> {
         ),
         body: SingleChildScrollView(
           child: SizedBox(
-            height: h / 1.1,
+            height: h ,
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,7 +40,7 @@ class _AddMessMenu extends State<AddMessMenu> {
                 AddMessMenuCard(day: 'Tuesday'),
                 AddMessMenuCard(day: 'Wednesday'),
                 AddMessMenuCard(day: 'Thurday'),
-                AddMessMenuCard(day: 'Firday'),
+                AddMessMenuCard(day: 'Friday'),
                 AddMessMenuCard(day: 'Saturday'),
               ],
             ),

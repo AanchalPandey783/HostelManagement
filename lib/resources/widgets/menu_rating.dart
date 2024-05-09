@@ -21,7 +21,8 @@ class _RatingScreenState extends State<RatingScreen> {
     final user = FirebaseAuth.instance.currentUser;
     final userId = user?.uid;
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
+    Timestamp formattedDate = Timestamp.fromDate(now);
+    
 
     if (userId != null) {
       final rating = Rating(
@@ -65,7 +66,7 @@ class _RatingScreenState extends State<RatingScreen> {
             Slider(
               min: 0,
               max: 10,
-              activeColor: Colors.deepOrangeAccent,
+              activeColor: Color.fromRGBO(1, 78, 68, 1),
               divisions: 10,
               value: _rating,
               onChanged: (newValue) {
@@ -74,8 +75,10 @@ class _RatingScreenState extends State<RatingScreen> {
                 });
               },
             ),
-            const SizedBox(height: 16),
-            CustomButton(msg: 'Submit Rating', onTap: _submitRating)
+            const SizedBox(height: 50),
+            CustomButton(msg: 'Submit Rating', onTap: _submitRating),
+            const SizedBox(height: 70),
+
           ],
         ),
       ),
